@@ -25,6 +25,8 @@ interface PhoneInputProps {
   onChange?: (value: string, country: Country) => void;
   placeholder?: string;
   className?: string;
+  error?: boolean;
+  helperText?: string;
 }
 
 const PhoneInput: React.FC<PhoneInputProps> = ({
