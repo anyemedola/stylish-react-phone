@@ -52,6 +52,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'phone-input': {
+					DEFAULT: 'hsl(var(--phone-input-bg))',
+					border: 'hsl(var(--phone-input-border))',
+					focus: 'hsl(var(--phone-input-focus))'
+				},
+				'phone-dropdown': {
+					DEFAULT: 'hsl(var(--phone-dropdown-bg))',
+					hover: 'hsl(var(--phone-dropdown-hover))'
+				},
+				'phone-flag': {
+					DEFAULT: 'hsl(var(--phone-flag-bg))',
+					foreground: 'hsl(var(--phone-flag-text))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
