@@ -92,6 +92,16 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
+    /* Phone Input dark mode tokens */
+    --phone-input-bg: 222.2 84% 4.9%;
+    --phone-input-border: 217.2 32.6% 17.5%;
+    --phone-input-focus: 210 40% 98%;
+    --phone-dropdown-bg: 222.2 84% 4.9%;
+    --phone-dropdown-hover: 217.2 32.6% 17.5%;
+    --phone-flag-bg: 142 76% 36%;
+    --phone-flag-text: 0 0% 100%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
