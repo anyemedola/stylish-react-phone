@@ -83,7 +83,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
               {selectedCountry.dialCode}
             </S.DialCode>
             <S.ChevronIcon 
-              $isOpen={isDropdownOpen}
+              isOpen={isDropdownOpen}
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
