@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronDown, Phone } from 'lucide-react';
-import { cn } from '@/lib/utils';
+
+// Simple utility function to combine class names
+const cn = (...classes: (string | undefined | false)[]) => {
+  return classes.filter(Boolean).join(' ');
+};
 
 interface Country {
   code: string;
@@ -77,10 +80,17 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
             <span className="text-sm font-medium text-foreground">
               {selectedCountry.dialCode}
             </span>
-            <ChevronDown className={cn(
-              "w-4 h-4 transition-transform duration-200 text-muted-foreground",
-              isDropdownOpen && "rotate-180"
-            )} />
+            <svg 
+              className={cn(
+                "w-4 h-4 transition-transform duration-200 text-muted-foreground",
+                isDropdownOpen && "rotate-180"
+              )}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
           </button>
 
           {/* Dropdown Menu */}
