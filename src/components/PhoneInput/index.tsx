@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as S from './styles';
 
 // Simple utility function to combine class names
 const cn = (...classes: (string | undefined | false)[]) => {
@@ -36,7 +37,9 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   value = '',
   onChange,
   placeholder = '912 345 678',
-  className
+  className,
+  error,
+  helperText
 }) => {
   const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -65,77 +68,74 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   };
 
   return (
-    <div className={cn("relative w-full max-w-md", className)}>
-      <div className="flex bg-phone-input border border-phone-input-border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-phone-input-focus focus-within:ring-offset-2 transition-all duration-200">
+    <S.PhoneInputContainer className={className}>
+      <S.InputWrapper>
         {/* Country Code Dropdown */}
-        <div className="relative">
-          <button
+        <S.CountryDropdownContainer>
+          <S.CountryButton
             type="button"
-            className="flex items-center gap-2 px-3 py-3 bg-phone-dropdown hover:bg-phone-dropdown-hover transition-colors duration-200 border-r border-phone-input-border focus:outline-none"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <div className="w-6 h-4 bg-phone-flag rounded-sm flex items-center justify-center text-xs font-bold text-phone-flag-foreground">
+            <S.FlagContainer>
               {selectedCountry.flag}
-            </div>
-            <span className="text-sm font-medium text-foreground">
+            </S.FlagContainer>
+            <S.DialCode>
               {selectedCountry.dialCode}
-            </span>
-            <svg 
-              className={cn(
-                "w-4 h-4 transition-transform duration-200 text-muted-foreground",
-                isDropdownOpen && "rotate-180"
-              )}
+            </S.DialCode>
+            <S.ChevronIcon 
+              $isOpen={isDropdownOpen}
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
             >
               <polyline points="6,9 12,15 18,9"></polyline>
-            </svg>
-          </button>
+            </S.ChevronIcon>
+          </S.CountryButton>
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-popover border border-border rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+            <S.DropdownMenu>
               {countries.map((country) => (
-                <button
+                <S.CountryOption
                   key={country.code}
                   type="button"
-                  className="w-full flex items-center gap-3 px-3 py-2 hover:bg-phone-dropdown-hover transition-colors duration-150 text-left"
                   onClick={() => handleCountrySelect(country)}
                 >
-                  <div className="w-6 h-4 bg-phone-flag rounded-sm flex items-center justify-center text-xs font-bold text-phone-flag-foreground">
+                  <S.FlagContainer>
                     {country.flag}
-                  </div>
-                  <span className="text-sm text-foreground">{country.name}</span>
-                  <span className="text-sm text-muted-foreground ml-auto">
+                  </S.FlagContainer>
+                  <S.CountryName>{country.name}</S.CountryName>
+                  <S.CountryDialCode>
                     {country.dialCode}
-                  </span>
-                </button>
+                  </S.CountryDialCode>
+                </S.CountryOption>
               ))}
-            </div>
+            </S.DropdownMenu>
           )}
-        </div>
+        </S.CountryDropdownContainer>
 
         {/* Phone Number Input */}
-        <div className="flex-1 relative">
-          <input
+        <S.PhoneNumberContainer>
+          <S.PhoneNumberInput
             type="tel"
             value={phoneNumber}
             onChange={handlePhoneChange}
             placeholder={placeholder}
-            className="w-full px-3 py-3 bg-transparent text-foreground placeholder-muted-foreground focus:outline-none text-sm"
           />
-        </div>
-      </div>
+        </S.PhoneNumberContainer>
+      </S.InputWrapper>
+
+      {/* Error or Helper Text */}
+      {error && helperText && <S.ErrorText>{helperText}</S.ErrorText>}
+      {!error && helperText && <S.HelperText>{helperText}</S.HelperText>}
 
       {/* Click outside to close dropdown */}
       {isDropdownOpen && (
-        <div
-          className="fixed inset-0 z-40"
+        <S.ClickOutside
           onClick={() => setIsDropdownOpen(false)}
         />
       )}
-    </div>
+    </S.PhoneInputContainer>
   );
 };
 
